@@ -3,65 +3,32 @@
   lib,
   ...
 }: let
-  mkWorkspace = name: config:
-    lib.concatStrings [
+  primaryMonitor = lib.headDef null (lib.flatten (lib.mapAttrsToList (port: config: lib.optional (config.primary) port)));
+  mkWorkspace = name: config: let
+    monitorName =
+      if config.monitor != null
+      then config.monitor
+      else if primaryMonitor != null
+      then primaryMonitor
+      else null;
+  in
+    lib.concatStringsSep ", " (lib.flatten [
       (
         if config.special
-        then "special:"
-        else ""
+        then "special:${name}"
+        else name
       )
-      "${name}, "
-      (
-        if config.monitor != null
-        then "monitor:${config.monitor}, "
-        else ""
-      )
-      (
-        if config.default
-        then "default:true, "
-        else ""
-      )
-      (
-        if config.gapsIn != null
-        then "gapsin:${config.gapsIn}, "
-        else ""
-      )
-      (
-        if config.gapsOut != null
-        then "gapsout:${config.gapsOut}, "
-        else ""
-      )
-      (
-        if config.borderSize != null
-        then "bordersize:${config.borderSize}, "
-        else ""
-      )
-      (
-        if config.border
-        then ""
-        else "border:false, "
-      )
-      (
-        if config.shadow
-        then ""
-        else "shadow:false, "
-      )
-      (
-        if config.rounding
-        then ""
-        else "rounding:false, "
-      )
-      (
-        if config.decorate
-        then ""
-        else "decorate:false, "
-      )
-      (
-        if config.persistent
-        then "persistent:true"
-        else ""
-      )
-    ];
+      (lib.optional (monitorName != null) "monitor:${monitorName}")
+      (lib.optional config.default "default:true")
+      (lib.optional (config.gapsIn != null) "gapsin:${config.gapsIn}")
+      (lib.optional (config.gapsOut != null) "gapsout:${config.gapsOut}")
+      (lib.optional (config.borderSize != null) "bordersize:${config.borderSize}")
+      (lib.optional (!config.border) "border:false")
+      (lib.optional (!config.shadow) "shadow:false")
+      (lib.optional (!config.rounding) "rounding:false")
+      (lib.optional (!config.decorate) "decorate:false")
+      (lib.optional config.persistent "persistent:true")
+    ]);
 in {
   assertions = [
     {

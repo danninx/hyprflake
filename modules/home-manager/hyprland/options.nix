@@ -15,6 +15,7 @@
       '';
       example = {
         "DP-1" = {
+          primary = true;
           resolution = {
             x = 2560;
             y = 1440;
@@ -57,6 +58,22 @@
       example = {
         "coding" = {
           monitor = "HDMI-A-1";
+          special = true;
+          persistent = false;
+
+          default = false;
+
+          gapsin = 2;
+          gapsout = 10;
+          border = true;
+          bordersize = 1;
+
+          rounding = false;
+          decorate = false;
+          shadow = false;
+        };
+        "gaming" = {
+          # since no monitor is set, this workspace will bind to the primary monitor
           special = true;
           persistent = false;
 

@@ -2,7 +2,7 @@
 lib.types.submodule {
   options = {
     monitor = lib.mkOption {
-      type = lib.nullOr lib.types.str; # TODO assertion: monitor must exist
+      type = lib.nullOr lib.types.str;
       default = null;
       description = "Monitor to bind this workspace to. Monitor will not be bound if null.";
       example = "HDMI-A-1";
