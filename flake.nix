@@ -16,7 +16,7 @@
     home-manager,
     ...
   } @ inputs: {
-    homeManagerModules.hyprflake = import./modules/home-manager/hyprland;
+    homeManagerModules.hyprflake = import./modules/home-manager/hyprflake/default.nix;
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
