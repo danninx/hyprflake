@@ -42,6 +42,7 @@ in {
       in (lib.length (lib.attrNames primaries) == 1);
       message = "You must set exactly one primary monitor";
     }
+    ## TODO assertion: each monitor must only have one default workspace
   ];
 
   config = {
