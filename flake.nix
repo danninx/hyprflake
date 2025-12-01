@@ -1,5 +1,5 @@
 {
-  description = "A helpful Hyprland ecosystem Home Manager module";
+  description = "A helpful Home Manager module for the Hyprland ecosystem";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";

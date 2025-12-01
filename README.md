@@ -1,6 +1,6 @@
 # hyprflake
 
-A helpful Hyprland ecosystem Home Manager module
+A helpful Home Manager module for the Hyprland ecosystem
 
 ## Overview
 
