@@ -70,7 +70,7 @@ home-manager.sharedModules = [ inputs.homeManagerModules.default ];
 
         monitors = {
             "DP-1" = {
-                primary = true;
+                primary = true; # you must have a primary monitor
                 resolution = { x = 2560; y = 1440; };
                 refresh = 144;
                 position = { x = 0; y = 0; };
@@ -91,8 +91,13 @@ home-manager.sharedModules = [ inputs.homeManagerModules.default ];
             "3" = { monitor = "DP-1"; presistent = true; };
             "4" = { monitor = "DP-1"; presistent = true; };
 
-            # 5 is assigned to the primary monitor. No workspaces remain unbound
-            "5" = { persistent = true; }
+            # The "games" workspace is assigned to the primary monitor since no monitor was specified
+            "games" = { 
+                special = true;
+                gapsin = 0;
+                gapsout = 0;
+                rounding = false;
+            }
 
             # hyprflake allows for more readable declaration of workspace rules
             "code" = { 
