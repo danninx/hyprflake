@@ -4,8 +4,8 @@
   ...
 }: let
   mkMonitor = port: config:
-    port
-    + lib.concatStrings [
+    lib.concatStrings [
+      port
       ", "
       (toString config.resolution.x)
       "x"
@@ -42,7 +42,15 @@ in {
       in (lib.length (lib.attrNames primaries) == 1);
       message = "You must set exactly one primary monitor";
     }
-    ## TODO assertion: each monitor must only have one default workspace
+    {
+      assertion = let
+        defaultSpaces = lib.filterAttrs (n: v: v.default == true && v.monitor != null) cfg.workspaces;
+        monitorOccurences = lib.mapAttrsToList (workspace: val: val.monitor) defaultSpaces;
+        valid = lib.length monitorOccurences == lib.length (lib.unique monitorOccurences);
+      in
+        valid;
+      message = "Monitors may have at most one default workspace";
+    }
   ];
 
   config = {

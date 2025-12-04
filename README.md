@@ -1,17 +1,18 @@
 # hyprflake
 
-A helpful Home Manager module for the Hyprland ecosystem
+A Home Manager module for the Hyprland ecosystem
 
 ## Overview
 
 Configuring the Hyprland ecosystem can be somewhat repetitive, and becomes more complex when sharing dotfiles across multiple machines.
 
-`hyprflake` attempts to address this issue by providing a structured and opinionated Home Manager module for the hyprland ecosystem.
+`hyprflake` attempts to address this issue by providing a structured and opinionated Home Manager module for the hyprland ecosystem. The use of attribute sets for object configuration as well as assertions allows for some semantic checking to be done, and prevents repetitive definitions from occurring in a configuration.
 
 ## Features
 
 - **Monitor configuration**: Declare monitor layouts in a clean attribute set
-- **Opinionated workspace management**: Bind workspaces to monitors, and assign a primary display for workspaces to bind to
+- **Opinionated workspace management**: Bind workspaces to monitors, configure a primary monitor unbound workspaces to bind to
+- `hyprpaper` integration with Monitor configuration
 
 ## Planned
 
@@ -115,3 +116,8 @@ home-manager.sharedModules = [ inputs.homeManagerModules.default ];
     };
 }
 ```
+
+## Why not 'x'?
+
+a. I'm a naive person
+b. This really just came out of my dotfiles, so I probably wasn't aware of it at the time of creation
