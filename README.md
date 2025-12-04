@@ -119,5 +119,5 @@ home-manager.sharedModules = [ inputs.homeManagerModules.default ];
 
 ## Why not 'x'?
 
-a. I'm a naive person
-b. This really just came out of my dotfiles, so I probably wasn't aware of it at the time of creation
+1. I'm a naive person
+2. This really just came out of my dotfiles, so I probably wasn't aware of it at the time of creation
