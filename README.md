@@ -93,10 +93,10 @@ home-manager.sharedModules = [ inputs.hyprflake.homeManagerModules.default ];
             "4" = { monitor = "DP-1"; persistent = true; };
 
             # The "games" workspace is assigned to the primary monitor since no monitor was specified
-            "games" = { 
+            "games" = {
                 special = true;
-                gapsin = 0;
-                gapsout = 0;
+                gapsIn = 0;
+                gapsOut = 0;
                 rounding = false;
             };
 
@@ -104,8 +104,8 @@ home-manager.sharedModules = [ inputs.hyprflake.homeManagerModules.default ];
             "code" = { 
                 monitor = "HDMI-A-1"; 
                 special = true; 
-                gapsin = 0;
-                gapsout = 0;
+                gapsIn = 0;
+                gapsOut = 0;
                 border = false;
                 rounding = false;
                 decorate = false;

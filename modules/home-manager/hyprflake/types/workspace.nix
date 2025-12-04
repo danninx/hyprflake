@@ -32,7 +32,7 @@ lib.types.submodule {
     borderSize = lib.mkOption {
       type = lib.nullOr lib.types.int;
       default = null;
-      descriptin = "Sets the border size around windows, in pixels, for this workspace. Ignored if null.";
+      description = "Sets the border size around windows, in pixels, for this workspace. Ignored if null.";
       example = 1;
     };
 
