@@ -1,80 +1,90 @@
-{lib, ...}:
-lib.types.submodule {
-  options = {
-    monitor = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Monitor to bind this workspace to. Monitor will not be bound if null.";
-      example = "HDMI-A-1";
-    };
+{
+  config,
+  lib,
+  ...
+}: let
+  defaultMonitors = lib.attrNames (lib.filterAttrs (m: v: v.primary == true) config.programs.hyprflake.monitors);
+  defaultMonitor =
+    if lib.lists.length defaultMonitors == 0
+    then null
+    else lib.lists.head defaultMonitors;
+in
+  lib.types.submodule {
+    options = {
+      monitor = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = defaultMonitor;
+        description = "Monitor to bind this workspace to. Monitor will not be bound if null.";
+        example = "HDMI-A-1";
+      };
 
-    default = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether this workspace should be the default workspace for the given monitor";
-      example = true;
-    };
+      default = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether this workspace should be the default workspace for the given monitor";
+        example = true;
+      };
 
-    special = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether this workspace is a special workspace.";
-    };
+      special = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether this workspace is a special workspace.";
+      };
 
-    gapsIn = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
-      default = null;
-      description = "Sets the gaps between windows, in pixels, for this workspace. Ignored if null.";
-      example = 2;
-    };
+      gapsIn = lib.mkOption {
+        type = lib.types.nullOr lib.types.int;
+        default = null;
+        description = "Sets the gaps between windows, in pixels, for this workspace. Ignored if null.";
+        example = 2;
+      };
 
-    gapsOut = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
-      default = null;
-      description = "Sets the gaps between windows and monitor edges, in pixels, for this workspace. Ignored if null.";
-      example = 5;
-    };
+      gapsOut = lib.mkOption {
+        type = lib.types.nullOr lib.types.int;
+        default = null;
+        description = "Sets the gaps between windows and monitor edges, in pixels, for this workspace. Ignored if null.";
+        example = 5;
+      };
 
-    borderSize = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
-      default = null;
-      description = "Sets the border size around windows, in pixels, for this workspace. Ignored if null.";
-      example = 1;
-    };
+      borderSize = lib.mkOption {
+        type = lib.types.nullOr lib.types.int;
+        default = null;
+        description = "Sets the border size around windows, in pixels, for this workspace. Ignored if null.";
+        example = 1;
+      };
 
-    border = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to draw borders or not";
-      example = true;
-    };
+      border = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to draw borders or not";
+        example = true;
+      };
 
-    shadow = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to draw shadows or not";
-      example = true;
-    };
+      shadow = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to draw shadows or not";
+        example = true;
+      };
 
-    rounding = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to draw rounded windows or not";
-      example = true;
-    };
+      rounding = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to draw rounded windows or not";
+        example = true;
+      };
 
-    decorate = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to draw window decorations or not";
-      example = true;
-    };
+      decorate = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to draw window decorations or not";
+        example = true;
+      };
 
-    persistent = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Keep this workspace alive even if empty and inactive";
-      example = true;
+      persistent = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Keep this workspace alive even if empty and inactive";
+        example = true;
+      };
     };
-  };
-}
+  }

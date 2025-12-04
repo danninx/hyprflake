@@ -32,7 +32,10 @@ lib.types.submodule {
         };
       };
 
-      default = { x = 1920; y = 1080; };
+      default = {
+        x = 1920;
+        y = 1080;
+      };
       description = ''Monitor resolution settings.'';
     };
 
@@ -66,7 +69,10 @@ lib.types.submodule {
           };
         };
       };
-      default = { x = 0; y = 0; };
+      default = {
+        x = 0;
+        y = 0;
+      };
       description = ''Position of the monitor in pixels.'';
     };
 
