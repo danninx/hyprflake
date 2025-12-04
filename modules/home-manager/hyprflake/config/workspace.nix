@@ -30,18 +30,18 @@
       (lib.optional config.persistent "persistent:true")
     ]);
 in {
-  assertions = [
-    {
-      assertion = let
-        validMonitors = lib.attrNames cfg.monitors;
-        boundMonitors = lib.mapAttrsToList (name: config: config.monitor) cfg.workspaces;
-      in
-        lib.lists.all (m: lib.lists.elem m validMonitors) boundMonitors;
-      message = "workspace's monitor must be present in the configuration";
-    }
-  ];
-
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = let
+          validMonitors = lib.attrNames cfg.monitors;
+          boundMonitors = lib.mapAttrsToList (name: config: config.monitor) cfg.workspaces;
+        in
+          lib.lists.all (m: lib.lists.elem m validMonitors) boundMonitors;
+        message = "workspace's monitor must be present in the configuration";
+      }
+    ];
+
     wayland.windowManager.hyprland.settings.workspace = lib.mapAttrsToList mkWorkspace cfg.workspaces;
   };
 }
