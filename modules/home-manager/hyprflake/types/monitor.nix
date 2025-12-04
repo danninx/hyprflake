@@ -10,25 +10,30 @@ lib.types.submodule {
       example = true;
     };
 
-    resolution = lib.types.submodule {
-      options = {
-        x = lib.mkOption {
-          type = lib.types.int;
-          default = 1920;
-          description = ''
-            X resolution size in pixels.
-            See https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
-          '';
-        };
-        y = lib.mkOption {
-          type = lib.types.int;
-          default = 1080;
-          description = ''
-            Y resolution size in pixels.
-            See https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
-          '';
+    resolution = lib.mkOption {
+      types = lib.types.submodule {
+        options = {
+          x = lib.mkOption {
+            type = lib.types.int;
+            default = 1920;
+            description = ''
+              X resolution size in pixels.
+              See https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
+            '';
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+            default = 1080;
+            description = ''
+              Y resolution size in pixels.
+              See https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
+            '';
+          };
         };
       };
+
+      default = { x = 1920; y = 1080; };
+      description = ''Monitor resolution settings.'';
     };
 
     refresh = lib.mkOption {
@@ -40,25 +45,29 @@ lib.types.submodule {
       '';
     };
 
-    position = lib.types.submodule {
-      options = {
-        x = lib.mkOption {
-          type = lib.types.int;
-          default = 0;
-          description = ''
-            X position offset for monitor. Position is based on the top-left corner
-            of the monitor. For more information see https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
-          '';
-        };
-        y = lib.mkOption {
-          type = lib.types.int;
-          default = 0;
-          description = ''
-            Y position offset for monitor. Position is based on the top-left corner
-            of the monitor. For more information see https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
-          '';
+    position = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          x = lib.mkOption {
+            type = lib.types.int;
+            default = 0;
+            description = ''
+              X position offset for monitor. Position is based on the top-left corner
+              of the monitor. For more information see https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
+            '';
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+            default = 0;
+            description = ''
+              Y position offset for monitor. Position is based on the top-left corner
+              of the monitor. For more information see https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general
+            '';
+          };
         };
       };
+      default = { x = 0; y = 0; };
+      description = ''Position of the monitor in pixels.'';
     };
 
     scale = lib.mkOption {
