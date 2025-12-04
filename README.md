@@ -37,7 +37,7 @@ inputs = {
 ### Standalone Home Manager
 
 ```nix
-Import the module into your `homeManagerConfiguration`:
+# Import the module into your `homeManagerConfiguration`:
 
 homeConfigurations = {
   "your-user@your-host" = home-manager.lib.homeManagerConfiguration {
@@ -57,7 +57,7 @@ homeConfigurations = {
 Add the module to the `home-manager.sharedModules`:
 
 ```nix
-home-manager.sharedModules = [ inputs.homeManagerModules.default ];
+home-manager.sharedModules = [ inputs.hyprflake.homeManagerModules.default ];
 ```
 
 ## Usage
@@ -98,7 +98,7 @@ home-manager.sharedModules = [ inputs.homeManagerModules.default ];
                 gapsin = 0;
                 gapsout = 0;
                 rounding = false;
-            }
+            };
 
             # hyprflake allows for more readable declaration of workspace rules
             "code" = { 
@@ -206,6 +206,8 @@ error: The option `...` has conflicting definition values:
     - In `/home/modules/hyprflake.nix`
     - In `/hosts/host1/home.nix`
 ```
+
+Errors like these and ones raised from assertions ensure consistency and stability in home configurations.
 
 ## Why not 'x'?
 
