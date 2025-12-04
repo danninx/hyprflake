@@ -1,8 +1,9 @@
 {
-  cfg,
+  config,
   lib,
   ...
 }: let
+  cfg = config.programs.hyprflake;
   mkMonitor = port: config:
     lib.concatStrings [
       port

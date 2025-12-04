@@ -1,8 +1,9 @@
 {
-  cfg,
+  config,
   lib,
   ...
 }: let
+  cfg = config.programs.hyprflake;
   primaryMonitor = lib.headDef null (lib.flatten (lib.mapAttrsToList (port: config: lib.optional (config.primary) port)));
   mkWorkspace = name: config: let
     monitorName =

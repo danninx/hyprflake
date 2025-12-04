@@ -1,8 +1,9 @@
 {
-  cfg,
+  config,
   lib,
   ...
 }: let
+  cfg = config.programs.hyprflake;
   hasWallpaper = lib.lists.filter (m: m.wallpaper != null) cfg.monitors;
   preloaded = lib.lists.unique (lib.lists.forEach hasWallpaper (m: m.wallpaper));
   defaultWallpaper = lib.defaultTo "none" cfg.defaultWallpaper;
