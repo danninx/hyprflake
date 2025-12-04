@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -7,7 +8,7 @@
     enable = lib.mkEnableOption "configuration for Hyprland using hyprflake";
 
     monitors = lib.mkOption {
-      type = lib.types.attrsOf (import ./types/monitor.nix {inherit lib;});
+      type = lib.types.attrsOf (import ./types/monitor.nix {inherit config lib;});
       description = ''
         An attribute set describing the monitors of the system.
         The key should be the port/name of the monitor, and the values are defined in types/monitor.nix.
@@ -48,7 +49,7 @@
     };
 
     workspaces = lib.mkOption {
-      type = lib.types.attrsOf (import ./types/workspace.nix {inherit lib;});
+      type = lib.types.attrsOf (import ./types/workspace.nix {inherit config lib;});
       description = ''
         An attribute set describing the workspaces on this system.
         The key should be the name of the workspace, and the values are defined in types/workspace.nix.
