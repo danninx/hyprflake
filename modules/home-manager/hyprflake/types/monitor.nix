@@ -72,7 +72,7 @@ lib.types.submodule {
 
     scale = lib.mkOption {
       type = lib.types.float;
-      default = 1;
+      default = 1.0;
       description = ''
         Scale of monitor. See https://wiki.hypr.land/0.44.0/Configuring/Monitors/#general"
       '';
