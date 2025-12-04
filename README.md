@@ -143,8 +143,8 @@ in
     
            "code" = {
                 special = true;
-                gapsin = 0;
-                gapsout = 0;
+                gapsIn = 0;
+                gapsOut = 0;
                 border = false;
                 rounding = false;
                 decorate = false;
