@@ -48,7 +48,7 @@
     };
 
     workspaces = lib.mkOption {
-      type = lib.types.attrOf (import ./types/workspace.nix {inherit lib;});
+      type = lib.types.attrsOf (import ./types/workspace.nix {inherit lib;});
       description = ''
         An attribute set describing the workspaces on this system.
         The key should be the name of the workspace, and the values are defined in types/workspace.nix.
