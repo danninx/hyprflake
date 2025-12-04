@@ -53,7 +53,7 @@ in {
     }
   ];
 
-  config = {
+  config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings.monitor = lib.mapAttrsToList mkMonitor cfg.monitors;
   };
 }

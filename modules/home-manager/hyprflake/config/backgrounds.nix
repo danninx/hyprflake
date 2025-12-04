@@ -18,7 +18,7 @@
       background_color = cfg.defaultBackgroundColor;
     };
 in {
-  config = {
+  config = lib. mkIf cfg.enable {
     # Wallpapers
     services.hyprpaper.settings = {
       preload = preloaded;
