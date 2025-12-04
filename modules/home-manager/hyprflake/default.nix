@@ -6,7 +6,7 @@
 }: let
   cfg = config.programs.hyprflake;
 in {
-  options = import ./options.nix {inherit lib pkgs;};
+  options = import ./options.nix {inherit config lib pkgs;};
 
   imports = [
     ./config/backgrounds.nix
