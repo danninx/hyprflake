@@ -7,5 +7,15 @@
   cfg = config.programs.hyprflake;
 in {
   options = import ./options.nix {inherit lib pkgs;};
-  config = import ./configuration.nix {inherit config lib pkgs cfg;};
+
+  imports = [
+    ./config/backgrounds.nix
+    ./config/monitor.nix
+    ./config/workspace.nix
+  ];
+
+  config = lib.mkIf cfg.enable {
+    wayland.windowManager.hyprland.enable = true;
+    services.hyprpaper.enable = true;
+  };
 }
