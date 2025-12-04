@@ -87,7 +87,7 @@
     };
 
     defaultWallpaper = lib.mkOption {
-      types = lib.types.nullOr lib.types.path;
+      type = lib.types.nullOr lib.types.path;
       default = null;
       description = ''
         Path to an image to be used by the default monitor. Optional value used for replacing wallpapers on monitors with no wallpaper set.
@@ -96,7 +96,7 @@
     };
 
     defaultBackgroundColor = lib.mkOption {
-      types = lib.types.nullOr lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = null;
       description = ''
         Hex value of to color to be used as a default background color for monitors with no wallpaper.
