@@ -15,6 +15,12 @@ lib.types.submodule {
       example = true;
     };
 
+    special = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether this workspace is a special workspace.";
+    };
+
     gapsIn = lib.mkOption {
       type = lib.types.nullOr lib.types.int;
       default = null;
