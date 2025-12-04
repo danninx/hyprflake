@@ -11,7 +11,7 @@ lib.types.submodule {
     };
 
     resolution = lib.mkOption {
-      types = lib.types.submodule {
+      type = lib.types.submodule {
         options = {
           x = lib.mkOption {
             type = lib.types.int;
