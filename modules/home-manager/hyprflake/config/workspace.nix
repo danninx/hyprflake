@@ -31,6 +31,20 @@
       (lib.optional (!config.decorate) "decorate:false")
       (lib.optional config.persistent "persistent:true")
     ]);
+  mkWorkspaceBinds = name: config: let
+    modKeys = binding: lib.concatStringsSep "and" binding.mods;
+    open =
+      if config.special
+      then "togglespecialworkspace, ${name}"
+      else "workspace, name:${name}";
+    move =
+      if config.special
+      then "movetoworkspace, special:${name}"
+      else "movetoworkspace, name:${name}";
+  in [
+    "${modKeys config.open}, ${open}"
+    "${modKeys config.moveWindow}, ${move}"
+  ];
 in {
   config = lib.mkIf cfg.enable {
     assertions = [
@@ -45,5 +59,6 @@ in {
     ];
 
     wayland.windowManager.hyprland.settings.workspace = lib.mapAttrsToList mkWorkspace cfg.workspaces;
+    wayland.windowManager.hyprland.settings.bind = lib.flatten (lib.mapAttrsToList mkWorkspaceBinds cfg.workspaces);
   };
 }

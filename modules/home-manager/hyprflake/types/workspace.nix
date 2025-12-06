@@ -8,6 +8,8 @@
     if lib.lists.length defaultMonitors == 0
     then null
     else lib.lists.head defaultMonitors;
+  keySequence = import ./keySequence.nix {inherit config lib;};
+  bindingType = import ./binding.nix {inherit config lib;};
 in
   lib.types.submodule {
     options = {
@@ -85,6 +87,32 @@ in
         default = false;
         description = "Keep this workspace alive even if empty and inactive";
         example = true;
+      };
+
+      open = lib.mkOption {
+        type = lib.types.nullOr keySequence;
+        default = null;
+        description = "Keybind sequence for opening the workspace";
+        example = {
+          mods = ["SUPER"];
+          key = "1";
+        };
+      };
+
+      moveWindow = lib.mkOption {
+        type = lib.types.nullOr keySequence;
+        default = null;
+        description = "Keybind sequence for moving a window to the workspace";
+        example = {
+          mods = ["SUPER" "SHIFT"];
+          key = "1";
+        };
+      };
+
+      extraBindings = lib.mkOption {
+        type = lib.types.listOf bindingType;
+        default = [];
+        description = "A list of keybinds associated with this workspace";
       };
     };
   }
