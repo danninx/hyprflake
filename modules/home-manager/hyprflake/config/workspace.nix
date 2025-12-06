@@ -14,6 +14,7 @@
       else null;
   in
     lib.concatStringsSep ", " (lib.flatten [
+      "name:${toString name}"
       (
         if config.special
         then "special:${name}"
