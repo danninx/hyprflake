@@ -42,8 +42,8 @@
       then "movetoworkspace, special:${name}"
       else "movetoworkspace, name:${name}";
   in [
-    "${modKeys config.open}, ${open}"
-    "${modKeys config.moveWindow}, ${move}"
+    (lib.optional (config.open != null) "${modKeys config.open}, ${open}")
+    (lib.optional (config.moveWindow != null) "${modKeys config.moveWindow}, ${move}")
   ];
 in {
   config = lib.mkIf cfg.enable {
