@@ -32,7 +32,7 @@
       (lib.optional config.persistent "persistent:true")
     ]);
   mkWorkspaceBinds = name: config: let
-    modKeys = binding: lib.concatStringsSep "and" binding.mods;
+    modKeys = binding: lib.concatStringsSep " and " binding.mods;
     open =
       if config.special
       then "togglespecialworkspace, ${name}"
@@ -42,8 +42,8 @@
       then "movetoworkspace, special:${name}"
       else "movetoworkspace, name:${name}";
   in [
-    (lib.optional (config.open != null) "${modKeys config.open}, ${open}")
-    (lib.optional (config.moveWindow != null) "${modKeys config.moveWindow}, ${move}")
+    (lib.optional (config.open != null) "${modKeys config.open}, ${config.open.key} ${open}")
+    (lib.optional (config.moveWindow != null) "${modKeys config.moveWindow}, ${config.moveWindow.key} ${move}")
   ];
 in {
   config = lib.mkIf cfg.enable {
