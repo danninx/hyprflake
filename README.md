@@ -110,6 +110,11 @@ home-manager.sharedModules = [ inputs.hyprflake.homeManagerModules.default ];
                 rounding = false;
                 decorate = false;
                 shadow = false;
+                windowSelectors = [
+                    {
+                        initialTitle = "Visual Studio Code";
+                    }
+                ];
             };
 
         };
