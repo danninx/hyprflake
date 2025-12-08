@@ -214,6 +214,24 @@ error: The option `...` has conflicting definition values:
 
 Errors like these and ones raised from assertions ensure consistency and stability in home configurations.
 
+Additionally, the `hyprflake` module alters the organization of some properties. For example, window rules that change the default workspace of a window can be defined directly within the workspaces themselves:
+
+```
+{
+    programs.hyprflake.workspaces."code" = {
+        ... 
+
+        windowSelectors = [
+            {
+                initialTitle = "Visual Studio Code";
+            }
+        ];
+    };
+}
+```
+
+This organization can be a bit more intuitive, as you can add/remove a workspace without needing to remember to remove its associated rules. The `wallpapers` option for monitors is another example, as it lets your wallpapers (which may be different resolutions) be bound to their underlying monitor, and handles the preloading required by `hyprpaper` ahead of time.
+
 ## Why not 'x'?
 
 1. I'm a naive person
