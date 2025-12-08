@@ -6,7 +6,7 @@
   cfg = config.programs.hyprflake;
   hasWallpaper = lib.filterAttrs (m: v: v.wallpaper != null) cfg.monitors;
   preloaded = lib.lists.unique (lib.mapAttrsToList (m: v: toString v.wallpaper) hasWallpaper);
-  defaultWallpaper = lib.defaultTo "none" (toString cfg.defaultWallpaper);
+  defaultWallpaper = toString (lib.defaultTo "none" cfg.defaultWallpaper);
   mkWallpaper = port: config:
     if config.wallpaper == null
     then "${port},${defaultWallpaper}"
