@@ -52,7 +52,11 @@
       if config.special
       then "special:${name}"
       else "name:${name}";
-    mkZeroOne = name: val: lib.optional (val != null) "${name}:${val ? "1": "0"}";
+      mkZeroOne = name: val: lib.optional (val != null) (
+        if val
+        then "${name}:1"
+        else "${name}:0"
+        );
     mkRule = fields: 
       lib.concatStringsSep ", " [
         "workspace ${identifier}" 
