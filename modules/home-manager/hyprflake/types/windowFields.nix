@@ -1,5 +1,4 @@
 {lib, ...}:
-
 lib.types.submodule {
   options = {
     # class:[regex]
