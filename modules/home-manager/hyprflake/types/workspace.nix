@@ -10,6 +10,7 @@
     else lib.lists.head defaultMonitors;
   keySequence = import ./keySequence.nix {inherit config lib;};
   bindingType = import ./binding.nix {inherit config lib;};
+  windowFieldsType = import ./windowFields.nix {inherit config lib;};
 in
   lib.types.submodule {
     options = {
@@ -113,6 +114,17 @@ in
         type = lib.types.listOf bindingType;
         default = [];
         description = "A list of keybinds associated with this workspace";
+      };
+
+      windowSelectors = lib.mkOption {
+        type = lib.types.listOf windowFieldsType;
+        default = [];
+        description = "A list of window selectors. Windows matching any of these window selectors will default to the parent workspace.";
+        example = [
+          {
+            class = "discord";
+          }
+        ];
       };
     };
   }

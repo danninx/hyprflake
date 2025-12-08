@@ -45,6 +45,31 @@
     (lib.optional (config.open != null) "${modKeys config.open}, ${config.open.key}, ${open}")
     (lib.optional (config.moveWindow != null) "${modKeys config.moveWindow}, ${config.moveWindow.key}, ${move}")
   ];
+
+  mkWorkspaceSelectorRules = name: config: let
+    selectors = config.windowSelectors;
+    identifier = 
+      if config.special
+      then "special:${name}"
+      else "name:${name}";
+    mkZeroOne = name: val: lib.optional (val != null) "${name}:${val ? "1": "0"}";
+    mkRule = fields: 
+      lib.concatStringsSep ", " [
+        "workspace ${identifier}" 
+        (lib.optional (fields.class != null) "class:${fields.class}")
+        (lib.optional (fields.title != null) "title:${fields.title}")
+        (lib.optional (fields.initialClass != null) "initialClass:${fields.initialClass}")
+        (lib.optional (fields.initialTitle != null) "initialTitle:${fields.initialTitle}")
+        (lib.optional (fields.tag != null) "tag:${fields.tag}")
+        (mkZeroOne "xwayland" fields.xwayland)
+        (mkZeroOne "floating" fields.floating)
+        (mkZeroOne "pinned" fields.pinned)
+        (mkZeroOne "focus" fields.focus)
+        (lib.optional (fields.workspace != null) "workspace:${fields.workspace}")
+        (lib.optional (fields.onWorkspace != null) "onworkspace:${fields.onWorkspace}")
+      ];
+  in lib.map mkRule selectors;
+
 in {
   config = lib.mkIf cfg.enable {
     assertions = [
@@ -60,5 +85,6 @@ in {
 
     wayland.windowManager.hyprland.settings.workspace = lib.mapAttrsToList mkWorkspace cfg.workspaces;
     wayland.windowManager.hyprland.settings.bind = lib.flatten (lib.mapAttrsToList mkWorkspaceBinds cfg.workspaces);
+    wayland.windowManager.hyprland.settings.windowrulev2 = lib.flatten (lib.mapAttrsToList mkWorkspaceSelectorRules cfg.workspaces);
   };
 }
