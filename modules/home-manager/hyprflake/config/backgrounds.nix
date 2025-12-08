@@ -9,8 +9,8 @@
   defaultWallpaper = lib.defaultTo "none" (toString cfg.defaultWallpaper);
   mkWallpaper = port: config:
     if config.wallpaper == null
-    then "${port}, ${defaultWallpaper}"
-    else "${port}, ${toString config.wallpaper}";
+    then "${port},${defaultWallpaper}"
+    else "${port},${toString config.wallpaper}";
   defaultBackground =
     if cfg.defaultBackgroundColor == null
     then {}
