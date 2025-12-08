@@ -72,6 +72,11 @@
           rounding = false;
           decorate = false;
           shadow = false;
+          windowSelectors = [
+            {
+              initialTitle = "Visual Studio Code";
+            }
+          ];
         };
         "gaming" = {
           # since no monitor is set, this workspace will bind to the primary monitor
@@ -83,6 +88,11 @@
           rounding = false;
           decorate = false;
           shadow = false;
+          windowSelectors = [
+            {
+              class = "steam";
+            }
+          ];
         };
       };
     };
