@@ -216,7 +216,7 @@ Errors like these and ones raised from assertions ensure consistency and stabili
 
 Additionally, the `hyprflake` module alters the organization of some properties. For example, window rules that change the default workspace of a window can be defined directly within the workspaces themselves:
 
-```
+```nix
 {
     programs.hyprflake.workspaces."code" = {
         ... 
