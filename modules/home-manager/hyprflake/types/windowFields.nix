@@ -102,13 +102,5 @@ lib.types.submodule {
       description = "Windows on matching workspace. 'w' can be 'id' or 'name:string'.";
       example = "id:1";
     };
-
-    # onworkspace:[w]
-    onWorkspace = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Windows on matching workspace. 'w' can be 'id', 'name:string' or 'workspace selector'.";
-      example = "name:web";
-    };
   };
 }

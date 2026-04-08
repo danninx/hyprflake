@@ -61,17 +61,16 @@
     mkRule = fields:
       lib.concatStringsSep ", " (lib.flatten [
         "workspace ${identifier}"
-        (lib.optional (fields.class != null) "class:${fields.class}")
-        (lib.optional (fields.title != null) "title:${fields.title}")
-        (lib.optional (fields.initialClass != null) "initialClass:${fields.initialClass}")
-        (lib.optional (fields.initialTitle != null) "initialTitle:${fields.initialTitle}")
-        (lib.optional (fields.tag != null) "tag:${fields.tag}")
+        (lib.optional (fields.class != null) "match:class ${fields.class}")
+        (lib.optional (fields.title != null) "match:title ${fields.title}")
+        (lib.optional (fields.initialClass != null) "match:initial_class ${fields.initialClass}")
+        (lib.optional (fields.initialTitle != null) "match:initial_title ${fields.initialTitle}")
+        (lib.optional (fields.tag != null) "match:tag ${fields.tag}")
         (mkZeroOne "xwayland" fields.xwayland)
         (mkZeroOne "floating" fields.floating)
         (mkZeroOne "pinned" fields.pinned)
         (mkZeroOne "focus" fields.focus)
-        (lib.optional (fields.workspace != null) "workspace:${fields.workspace}")
-        (lib.optional (fields.onWorkspace != null) "onworkspace:${fields.onWorkspace}")
+        (lib.optional (fields.workspace != null) "workspace ${fields.workspace}")
       ]);
   in
     lib.map mkRule selectors;
@@ -90,6 +89,6 @@ in {
 
     wayland.windowManager.hyprland.settings.workspace = lib.mapAttrsToList mkWorkspace cfg.workspaces;
     wayland.windowManager.hyprland.settings.bind = lib.flatten (lib.mapAttrsToList mkWorkspaceBinds cfg.workspaces);
-    wayland.windowManager.hyprland.settings.windowrulev2 = lib.flatten (lib.mapAttrsToList mkWorkspaceSelectorRules cfg.workspaces);
+    wayland.windowManager.hyprland.settings.windowrule = lib.flatten (lib.mapAttrsToList mkWorkspaceSelectorRules cfg.workspaces);
   };
 }
